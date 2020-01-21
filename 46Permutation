@@ -1,0 +1,17 @@
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res = []
+        self.dfs(nums, res, [])
+        return res
+        
+    def dfs(self,nums, res, temp):
+        if not nums:
+            res.append(temp)
+        
+        for i in range(len(nums)):
+            
+            self.dfs(nums[:i]+nums[i+1:],res,temp+[nums[i]])
