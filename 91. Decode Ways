@@ -1,0 +1,44 @@
+# recursive, meet time limit problem. the answer is right
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        if not s or s[0] == '0':
+            return 0
+        
+        index = len(s)-1        
+        return self.decode(s, index )
+    
+    def decode(self, s, index):
+        if index <= 0:
+            return 1
+            
+        count = 0
+        pre = s[index-1]
+        curr = s[index]
+        if curr >'0':
+            count = self.decode(s, index-1)
+        
+        if pre == '1' or (pre == '2' and curr <='6'):
+            count += self.decode( s, index-2)
+            
+        return count
+ 
+ 
+# dp solution, meet the time limit requirements:
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        if not s or s[0] == '0':
+            return 0
+        l = len(s)
+    
+        count = [0 for _ in range(l+1)]
+        count[0] = 1
+        count[1] = 1
+
+        for index in range(2,l+1):
+            if s[index-1]>'0' and s[index-1]<='9':
+                count[index] = count[index-1]
+            if s[index-2:index] >='10' and s[index-2:index]<='26':
+                count[index] += count[index-2]
+            
+        
+        return count[l]
