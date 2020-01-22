@@ -1,0 +1,16 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        result = 0
+        mapping = {'M': 1000,'D': 500 ,'C': 100,'L': 50,'X': 10,'V': 5,'I': 1}
+        length = len(s)
+        for i in range(length-1):
+            if mapping[s[i+1]] > mapping[s[i]]:
+                result -=  mapping[s[i]]
+                
+            else:
+                result += mapping[s[i]]
+                
+
+        result += mapping[s[length-1]]
+                        
+        return result
