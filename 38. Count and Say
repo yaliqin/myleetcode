@@ -1,0 +1,32 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        if n == 1:
+            return '1'
+        else:
+            output =""
+            temp = self.countAndSay(n-1)
+            length = len(temp)
+            i = 0
+            while i< length-1:
+                count = 0
+                j = i+1
+                while j< length:
+                    if temp[i]==temp[j]:
+                        count += 1
+                    else:
+                        break
+                    j += 1
+                    
+                if count == 0: # next digital is different
+                    output += '1'
+                    output += temp[i]
+                else:
+                    output += str(count+1)
+                    output += temp[i]
+                
+                i = j
+            if(i <= length-1):
+                output += '1'    
+                output += temp[length-1]
+            return output
+            
