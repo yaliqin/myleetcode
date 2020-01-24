@@ -18,4 +18,26 @@ class Solution:
             self.dfs(nums, target - nums[i], i, path + [nums[i]], res)
             
             
-# solution 2: backtracing   
+# solution 2: dfs with early stop
+
+class Solution:
+    def combinationSum(self, candidates, target):
+        res = []
+        candidates.sort()
+        if len(candidates) == 0 :
+            return res
+        self.dfs(candidates, target, 0, [], res)
+        return res
+
+    def dfs(self, candidates, target, start,curr, res):
+            if target == 0:
+                res.append(curr[:])
+                return
+            
+            for i in range(start,len(candidates)):
+                if candidates[i]>target:
+                    break
+                curr.append(candidates[i])
+                self.dfs(candidates, target-candidates[i],i,curr,res)
+                curr.pop(-1)
+        
