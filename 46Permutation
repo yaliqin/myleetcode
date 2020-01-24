@@ -15,3 +15,28 @@ class Solution(object):
         for i in range(len(nums)):
             
             self.dfs(nums[:i]+nums[i+1:],res,temp+[nums[i]])
+
+
+# solution 2: using dfs template
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        self.permutation(nums, 0, len(nums),[False]*len(nums),[],ans)
+        return ans
+        
+        
+    def permutation(self,nums, d, n, used, curr, ans):
+        if d == n: # reach the depth
+            ans.append(curr[:])
+            return
+
+        for i in range(len(nums)): 
+            if used[i]:
+                continue
+            used[i] = True
+            curr.append(nums[i])
+            self.permutation(nums, d+1, n, used, curr, ans)
+            curr.pop(-1)
+            used[i] = False
+        
