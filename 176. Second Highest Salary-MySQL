@@ -1,5 +1,13 @@
 # Write your MySQL query statement below
+#solution 1:
 SELECT MAX(SALARY) as SecondHighestSalary
 FROM Employee
 WHERE Salary NOT IN (SELECT MAX(Salary)
 FROM Employee)
+
+
+#solution 2:
+# Write your MySQL query statement below
+SELECT MAX(Salary) as 'SecondHighestSalary'
+from Employee
+Where Salary < (SELECT MAX(Salary) from employee);
